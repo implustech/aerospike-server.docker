@@ -3,11 +3,13 @@
 #
 # http://github.com/aerospike/aerospike-server.docker
 #
+# build docker images with enterprise server edition
 
 FROM ubuntu:xenial
 
-ENV AEROSPIKE_VERSION 4.0.0.4
-ENV AEROSPIKE_SHA256 44e2c992d1cf55643fcae1aa95190b3f8638dff54d98e8ca8e4a6dc2cac7e647
+ARG AS_VERSION=4.0.0.5
+ARG AS_USER=nouser
+ARG AS_PASSWORD=nopass
 
 
 # Install Aerospike Server and Tools
@@ -16,8 +18,7 @@ ENV AEROSPIKE_SHA256 44e2c992d1cf55643fcae1aa95190b3f8638dff54d98e8ca8e4a6dc2cac
 RUN \
   apt-get update -y \
   && apt-get install -y wget python python-argparse python-bcrypt python-openssl logrotate net-tools iproute2 iputils-ping gettext-base\
-  && wget "https://www.aerospike.com/artifacts/aerospike-server-community/${AEROSPIKE_VERSION}/aerospike-server-community-${AEROSPIKE_VERSION}-ubuntu16.04.tgz" -O aerospike-server.tgz \
-  && echo "$AEROSPIKE_SHA256 *aerospike-server.tgz" | sha256sum -c - \
+  && wget -O aerospike-server.tgz "https://www.aerospike.com/enterprise/download/server/${AS_VERSION}/artifact/ubuntu16" --user=${AS_USER} --password=${AS_PASSWORD}\
   && mkdir aerospike \
   && tar xzf aerospike-server.tgz --strip-components=1 -C aerospike \
   && dpkg -i aerospike/aerospike-server-*.deb \
