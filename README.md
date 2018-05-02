@@ -6,13 +6,11 @@ with automatic fail-over, replication and cross data-center synchronization.
 
 Documentation for Aerospike is available at [http://aerospike.com/docs](http://aerospike.com/docs).
 
-# Using this Image
+# How to
 
-The following will run `asd` with all the exposed ports forward to the host machine.
+The following will build the docker image.
 
-	docker run -tid --name aerospike -p 3000:3000 -p 3001:3001 -p 3002:3002 -p 3003:3003 aerospike/aerospike-server
-	
-**NOTE** Although this is the simplest method to getting Aerospike up and running, but it is not the preferred method. To properly run the container, please specify an **custom configuration** with the **access-address** defined.
+	docker build --build-arg AS_USER=<user> --build-arg AS_PASSWORD=<password> [--build-arg AS_VERSION=<version>] github.com/implustech/aerospike-server.docker
 
 
 
