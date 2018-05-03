@@ -17,7 +17,7 @@ ARG AS_PASSWORD=nopass
 
 RUN \
   apt-get update -y \
-  && apt-get install -y wget python python-argparse python-bcrypt python-openssl logrotate net-tools iproute2 iputils-ping gettext-base\
+  && apt-get install -y wget python python-argparse python-bcrypt python-openssl logrotate net-tools iproute2 iputils-ping gettext-base python-toml python-jsonschema\
   && wget -O aerospike-server.tgz "https://www.aerospike.com/enterprise/download/server/${AS_VERSION}/artifact/ubuntu16" --user=${AS_USER} --password=${AS_PASSWORD}\
   && mkdir aerospike \
   && tar xzf aerospike-server.tgz --strip-components=1 -C aerospike \
